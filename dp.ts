@@ -207,8 +207,7 @@ function restoreIpAddresses(s: string): string[] {
                 console.log("Tmp",  tmp);
                 result += tmp + ".";
                 tmp = "";
-            } else
-                break;
+            }
         }
     }
     dfs(arr, 0);
