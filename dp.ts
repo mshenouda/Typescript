@@ -214,8 +214,25 @@ function restoreIpAddresses(s: string): string[] {
     console.log(result);
     return arr;
 };
-const s = "101023";
-const result: string[] = restoreIpAddresses(s);
+// const s = "101023";
+// const result: string[] = restoreIpAddresses(s);
+// console.log(`Result is ${result}`);
+
+function addSpaces(s: string, spaces: number[]): string {
+    let result: string = "";
+    let j: number = 0;
+    for(let i=0; i< s.length; i++) {
+        if (spaces[j] == i)
+        {
+            result += ' ';
+            j++;            
+        }
+        result += s[i];
+    }
+    return result;
+};
+// const s = "LeetcodeHelpsMeLearn", spaces = [8,13,15];
+// const s = "spacing", spaces = [0,1,2,3,4,5,6]
+const s = "icodeinpython", spaces = [1,5,7,9]
+const result: string = addSpaces(s, spaces);
 console.log(`Result is ${result}`);
-
-
