@@ -226,35 +226,53 @@ function postorderTraversal(root: TreeNode | null): number[] {
 };
 
 function sumOfLeftLeaves(root: TreeNode | null): number {
-    function dfs(root: TreeNode | null): void {
+    function dfs(root: TreeNode | null): number {
+        let result: number =0;
+        
         if (root == null)
-            return;
-        if(root.left != null) {
-            dfs(root.left);
-            if (root.left == null)
-                result = [...result, root.val];
-        }
-        if(root.right != null)
-            dfs(root.right);  
+            return 0;
+        
+        if (root && root.left == null && root.right == null)
+            return 0;
+
+        if (root && root.left && root.left.left)
+            result += dfs(root.left);
+        else if (root.left.left == null)
+            result += root.left.val;
+
+        if(root && root.right)
+            result += dfs(root.right); 
+
+        return result;
     }
-    let result: number[] = [];
-    dfs(root);
-    const val: number = result.reduce((a, b)=> a +b, 0);
-    return val;
+    const result: number =  dfs(root);
+    return result;
 }
-const root = new TreeNode(3);
-const nine = new TreeNode(9);
-const twenty = new TreeNode(20);
 
-const fivteen = new TreeNode(15);
-const seven = new TreeNode(7);
-twenty.right = seven;
-twenty.left = fivteen;
-root.left = nine;
-root.right = twenty;
+// const root = new TreeNode(3);
+// const nine = new TreeNode(9);
+// const twenty = new TreeNode(20);
 
-// const result: number = sumOfLeftLeaves(root);
-// console.log(`Result is ${result}`);
+// const fivteen = new TreeNode(15);
+// const seven = new TreeNode(7);
+// twenty.right = seven;
+// twenty.left = fivteen;
+// root.left = nine;
+// root.right = twenty;
+
+const root = new TreeNode(1);
+const two = new TreeNode(2);
+const three = new TreeNode(3);
+
+const four = new TreeNode(4);
+const five = new TreeNode(5);
+two.left = four;
+two.right = five;
+root.left = two;
+root.right = three;
+
+const result: number = sumOfLeftLeaves(root);
+console.log(`Result is ${result}`);
 
 function largestOddNumber(num: string): string {
     if (Number(num) %2 ==1)

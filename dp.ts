@@ -233,6 +233,98 @@ function addSpaces(s: string, spaces: number[]): string {
 };
 // const s = "LeetcodeHelpsMeLearn", spaces = [8,13,15];
 // const s = "spacing", spaces = [0,1,2,3,4,5,6]
-const s = "icodeinpython", spaces = [1,5,7,9]
-const result: string = addSpaces(s, spaces);
-console.log(`Result is ${result}`);
+// const s = "icodeinpython", spaces = [1,5,7,9]
+// const result: string = addSpaces(s, spaces);
+// console.log(`Result is ${result}`);
+function maxSubsequence(nums: number[], k: number): number[] {
+    let sorted: any[] = nums.map((value, index) => {
+        let obj: any = {};
+        obj["index"] = index
+        obj["value"] = value;
+        return obj;
+    }).sort((a, b)=> b.value - a.value);
+
+    sorted.length = k
+
+    const result = sorted.sort((a, b)=> a.index - b.index).map(x => x["value"]);
+    return result;
+};
+
+// const  nums = [-1,-2,3,4], k = 3;
+// const result: number[] = maxSubsequence(nums, k);
+// console.log(`Result is ${result}`);
+function specialArray(nums: number[]): number {
+    let result: number = 0;
+    nums.sort((a, b)=> a -b);
+    const n: number = nums.length;
+    let dp: number[] = [...Array(n)].map(x => 0);
+    dp[0] = n;
+    for(let i=0; i<=n; i++) {
+        let j: number = n-1;
+        let counter: number = 0;
+        while(nums[j] >= i) {
+            j--;
+            counter++;
+        }
+        if ( counter == i)
+            return i;
+    }
+    return -1;
+};
+// const nums = [3,5];
+// const nums = [0,4,3,0,4];
+// const nums = [0, 0];
+// const result: number = specialArray(nums);
+// console.log(`Result is ${result}`);
+
+function binarySearch(nums: number[], target: number): boolean {
+
+    let mid: number = Math.floor(nums.length/ 2);
+    if (nums[mid] == target) return true;
+    if (nums[mid] > target) return binarySearch(nums.slice(mid+1), target);
+    if (nums[mid] < target) return binarySearch(nums.slice(0, mid), target);
+    return false;
+}
+
+function findTheDistanceValue(arr1: number[], arr2: number[], d: number): number {
+    arr2.sort((a, b)=> a -b);
+    let counter: number =0;
+
+    for(let num of arr1) {
+        let flag: boolean = false;
+        for(let v = num -d; v <= num + d; v++) {
+            if (arr2.includes(v)) {
+                flag = true;
+                break;
+            }
+        }
+        if (flag)
+            counter++;
+    }
+    return arr1.length - counter;
+};
+// const arr1 = [4,5,8], arr2 = [10,9,1,8], d = 2;
+// const arr1 = [1,4,2,3], arr2 = [-4,-3,6,10,20,30], d = 3;
+// const arr1 = [2,1,100,3], arr2 = [-5,-2,10,-3,7], d = 6;
+// const result: number = findTheDistanceValue(arr1, arr2, d);
+// console.log(`Result is ${result}`);
+function longestPalindrome(s: string): number {
+
+    const letters: any = new Set(s.split(""));
+    let maxLength: number = 0;
+    let maxOddLength: number = 0;
+    for(let letter of letters) {
+        const result = s.split("").map((e, i) => {if (e === letter) return e;}).filter(Boolean).length;
+        const partners = Math.floor(result / 2)*2;
+        maxLength += partners; 
+        if (maxLength % 2 == 0 && result % 2 == 1)
+            maxLength++; 
+    }
+    return maxLength;
+};
+// const s: string = "abccccdd";
+// const result: number = longestPalindrome(s);
+// console.log(`Result is ${result}`);
+// function countValidWords(sentence: string): number {
+
+// };
