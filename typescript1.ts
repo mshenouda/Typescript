@@ -1,7 +1,3 @@
-import { time } from "console";
-import { allowedNodeEnvironmentFlags } from "process";
-
-var array = require('lodash/array');
 
 function findIndex(array: string[], value: string): number {
     for(var i in array) {
@@ -580,37 +576,28 @@ function mostFrequent2(nums: number[], key: number): number {
 // const nums = [2,2,2,2,3], key = 2
 // const result = mostFrequent2(nums, key);
 // console.log(`Result is ${result}`);
-function cellsInRange(s: string): string[] {
-    const result: string[] = [];
-    const pattern = /([A-Z]+)([1-9]+):([A-Z]+)([1-9]+)/g;
-    const iter = s.matchAll(pattern);
-    const values = iter.next().value;
-    const l1 = values[1]; 
-    const n1 = values[2];
-    const l2 = values[3];
-    const n2 = values[4];
-    for(let row: number = l1.charCodeAt(0); row <= l2.charCodeAt(0); row++)
-       for(let col: number = Number(n1); col <= Number(n2) ;col++)   
-        {
-            result.push(String.fromCharCode(row)+col.toString());
-        }   
-    return result;
-};
+
+// function cellsInRange(s: string): string[] {
+//     const result: string[] = [];
+//     const pattern = /([A-Z]+)([1-9]+):([A-Z]+)([1-9]+)/g;
+//     const iter = s.matchAll(pattern);
+//     const values = iter.next().value;
+//     const l1 = values[1]; 
+//     const n1 = values[2];
+//     const l2 = values[3];
+//     const n2 = values[4];
+//     for(let row: number = l1.charCodeAt(0); row <= l2.charCodeAt(0); row++)
+//        for(let col: number = Number(n1); col <= Number(n2) ;col++)   
+//         {
+//             result.push(String.fromCharCode(row)+col.toString());
+//         }   
+//     return result;
+// };
 // const s = "K1:L2";
 // const result = cellsInRange(s);
 // console.log(`Result is ${result}`);
 function numOfStrings(patterns: string[], word: string): number {
     let counter: number = 0;
-    // interface obj {
-    //     [key: string]: boolean
-    // };
-    // let counter: obj = {}; 
-    
-    // for(var pattern of patterns) {
-    //     if (!counter[pattern] && word.includes(pattern))
-    //         counter[pattern] = true;  
-    // }
-    //return Object.keys(counter).length;
     for(var pattern of patterns) {
         if (word.includes(pattern))
             counter+=1;  

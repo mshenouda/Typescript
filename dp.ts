@@ -1,32 +1,3 @@
-import { time } from "console";
-import { allowedNodeEnvironmentFlags } from "process";
-
-function maxArea(height: number[]): number {
-    return 0;
-};
-
-function hIndex(citations: number[]): number {
-    
-    if (citations.length <= 1 && citations[0] == 0)
-        return 0;
-    if (citations.length <= 1 && citations[0] != 0)
-        return 1;
-
-    citations.sort((a, b)=> a-b);
-    let result: number = 0;
-    let n: number = citations.length;
-    for(let i in citations) {
-        const bigger: number = n - Number(i) + 1;
-        const smaller: number = Number(i) + 1;
-        console.log(bigger, smaller);
-        if (bigger == smaller) {
-            result = Math.max(result, citations[i]);
-        }
-    }
-    return result;
-};
-
-
 // function searchRange(nums: number[], target: number): number[] {
 
 //     let result: number[] = [];
@@ -188,32 +159,6 @@ function convertStr2Num(nums: string) {
     return num;
 }
 
-
-function restoreIpAddresses(s: string): string[] {
-    const arr: string[] = s.split("");
-    console.log("Array", arr);
-    let tmp: string = "";
-    let result: string = "";
-    function dfs(arr: string[], count:number) {
-        for(let i =0; i<arr.length; i++)
-        {   
-            console.log(...arr, count);
-            tmp += arr[i];
-            const val = convertStr2Num(tmp);
-            if (count <= 4 &&  val>= 0 && val<= 255) {                    
-                arr.splice(i, 1); 
-                dfs(arr, count+1);
-                tmp = tmp.slice(0, -1);
-                console.log("Tmp",  tmp);
-                result += tmp + ".";
-                tmp = "";
-            }
-        }
-    }
-    dfs(arr, 0);
-    console.log(result);
-    return arr;
-};
 // const s = "101023";
 // const result: string[] = restoreIpAddresses(s);
 // console.log(`Result is ${result}`);
@@ -275,16 +220,7 @@ function specialArray(nums: number[]): number {
 // const nums = [0,4,3,0,4];
 // const nums = [0, 0];
 // const result: number = specialArray(nums);
-// console.log(`Result is ${result}`);
-
-function binarySearch(nums: number[], target: number): boolean {
-
-    let mid: number = Math.floor(nums.length/ 2);
-    if (nums[mid] == target) return true;
-    if (nums[mid] > target) return binarySearch(nums.slice(mid+1), target);
-    if (nums[mid] < target) return binarySearch(nums.slice(0, mid), target);
-    return false;
-}
+// console.log(`Result is ${result}`)
 
 function findTheDistanceValue(arr1: number[], arr2: number[], d: number): number {
     arr2.sort((a, b)=> a -b);
@@ -322,9 +258,3 @@ function longestPalindrome(s: string): number {
     }
     return maxLength;
 };
-// const s: string = "abccccdd";
-// const result: number = longestPalindrome(s);
-// console.log(`Result is ${result}`);
-// function countValidWords(sentence: string): number {
-
-// };
